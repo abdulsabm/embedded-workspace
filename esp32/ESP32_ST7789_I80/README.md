@@ -2,20 +2,20 @@
 
 ## 1. Open VS Code
     Open Visual Studio Code.
-    Open the ESP32 workspace:
-    D:\ESP32
+    Open the ESP32 project folder:
+    \embedded-workspace\esp32\ESP32_ST7789_I80
 
 ## 2. Create a New Project
     Press: Ctrl + Shift + P
     Select: ESP-IDF: Create New Project
     Enter the project name.
         Example: esp_example_test
-        Choose: D:\ESP32
-    The project will be created at: D:\ESP32\esp_example_test
+        Choose: \embedded-workspace\esp32
+    The project will be created at: \embedded-workspace\esp32\esp_example_test
 
 ## 3. Open the Project
     In VS Code: File → Open Folder
-    Select: D:\ESP32\esp_example_test
+    Select: \embedded-workspace\esp32\esp_example_test
 
 ## 4. Select ESP-IDF Version
     Press: Ctrl + Shift + P
