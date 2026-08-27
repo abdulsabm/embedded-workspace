@@ -15,6 +15,7 @@ CMakeFiles/
 *.bin
 *.hex
 *.map
+*.exe
 
 # IDE files
 .vscode/
