@@ -1,0 +1,22 @@
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+
+# C / Embedded Build Artifacts
+build/
+bin/
+obj/
+.pio/
+CMakeCache.txt
+CMakeFiles/
+*.elf
+*.bin
+*.hex
+*.map
+
+# IDE files
+.vscode/
+.idea/
+.settings/
