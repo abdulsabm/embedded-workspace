@@ -1,0 +1,4 @@
+// 01_Compiler_Infrastructure: Understanding the translation phases (Preprocessing, Compilation, Assembly, Linking).
+// 02_Compilation_Flags: Mastering gcc optimization flags (-O0, -O2, -O3), debugging flags (-g), and warning flags (-Wall, -Wextra, -Werror).
+// 03_Static_vs_Dynamic_Linking: Compiling and linking static libraries (.a, .lib) and shared/dynamic libraries (.so, .dll).
+// 04_Build_Automation: Writing automation configurations using Makefiles (make) or modern tools like CMake.

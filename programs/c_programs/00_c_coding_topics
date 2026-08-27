@@ -1,0 +1,70 @@
+1. Development Environment & Compilation Theory:
+    •	Compiler Infrastructure: Understanding the translation phases (Preprocessing, Compilation, Assembly, Linking).
+    •	Compilation Flags: Mastering gcc optimization flags (-O0, -O2, -O3), debugging flags (-g), and warning flags (-Wall, -Wextra, -Werror).
+    •	Static vs. Dynamic Linking: Compiling and linking static libraries (.a, .lib) and shared/dynamic libraries (.so, .dll).
+    •	Build Automation: Writing automation configurations using Makefiles (make) or modern tools like CMake.
+2. Basic Syntax & Core Type System:
+    •	Basic I/O Operations: Formatted stream interactions using printf(), scanf(), and unformatted operations like putchar(), getchar(), puts(), and gets_s().
+    •	Fundamental Data Types: Size, range, and behavior of standard types: char, int, float, double.
+    •	Type Modifiers: Altering data ranges and properties using signed, unsigned, short, and long.
+    •	Fixed-Width Integer Types: Using modern portable standards from <stdint.h> (e.g., uint32_t, int16_t).
+    •	Constants & Literals: Defining immutable values via #define, const, hexadecimals (0x), octals (0), and binaries (0b).
+3. Operators, Bit-Manipulation & Memory Expressions:
+    •	Arithmetic & Assignment Operators: Standard operators (+, -, *, /, %) and compound assignments (+=, *=, ++, --).
+    •	Relational & Logical Expressions: Logical evaluations using ==, !=, <, >, &&, ||, and !.
+    •	Bitwise Operations: Lower-level hardware control using Bitwise AND (&), OR (|), XOR (^), NOT (~), Left Shift (<<), and Right Shift (>>).
+    •	Masking & Bit Flags: Techniques to set, clear, toggle, and query specific bits in an integer.
+    •	Operator Precedence & Evaluation Order: Sequencing of evaluations, shortcuts (short-circuit logic), and explicit ordering using parentheses.
+    •	Type Conversions: Implicit promotion rule dynamics and explicit Type Casting (type).
+4. Control Flow & Branching Logic:
+    •	Conditional Selection: Structuring path decisions via if, else if, else, and the Ternary Operator (? :).
+    •	Multi-way Branching: Implementing switch patterns with explicit case, default, and mastering switch fall-through logic.
+    •	Counter & Condition Loops: Iteration structures via for, while, and post-condition do-while loops.
+    •	Jump Statements: Non-local flow manipulation using break, continue, return, and structural error jumps via goto.
+5. Arrays & String Architectures:
+    •	One-Dimensional Arrays: Memory-contiguous sequences of scalar blocks, initialization tricks, and indexing loops.
+    •	Multi-Dimensional Arrays: Multi-axis contiguous data tracking (e.g., 2D matrices, 3D spatial grids) and their linear memory layouts.
+    •	Null-Terminated Strings: Handling textual data as standard null-terminated (\0) character sequences.
+    •	Standard String Library (<string.h>): Deep-dive implementations of string metrics and manipulations: strlen(), strcpy(), strncpy(), strcat(), strcmp(), strchr(), and strstr().
+    •	String Parsing: Splitting and decoding complex text arrays with tokenizers like strtok() or formatted readers like sscanf().
+6. Modular Programming & Functions:
+    •	Function Architecture: Writing clean separation signatures via declarations (prototypes) and implementations.
+    •	Parameter Passing Dynamics: Evaluating runtime differences between Pass-by-Value and Pass-by-Reference (via memory addresses).
+    •	Recursion: Coding mathematical self-calling functions, structural termination safety, and tracking Stack Overflow risks.
+    •	Storage Classes: Managing tracking variables across system lifetimes using auto, register, static, and globally shared extern declarations.
+7. Pointers & System Memory Access:
+    •	Pointer Essentials: Extracting memory addresses with & and pulling values with the dereference operator (*).
+    •	Pointer Arithmetic: Advancing or decrementing pointers safely across typed memory buffers.
+    •	Pointers & Arrays Relationship: Understanding array-name-to-pointer decay behaviors and processing arrays via pointer references.
+    •	Pointer Indirection Layers: Managing complex multi-tier pointer references like Double Pointers (int **ptr).
+    •	Function Pointers: Mapping function memory locations into runtime callback interfaces.
+8. Custom Data Structures & Typing:
+    •	Structures (struct): Bundling heterogeneous primitive groups, structure padding behaviors, and structural size packing (#pragma pack).
+    •	Structure Pointers: Accessing nested elements cleanly via the arrow selection syntax (->).
+    •	Unions (union): Optimizing footprint tracking where nested elements dynamically share identical hardware memory addresses.
+    •	Bit-Fields: Defining specific bit-widths inside custom structures to fit raw data payloads tightly.
+    •	Type Aliasing (typedef): Packaging clean alias abstractions for obscure structure definitions and complex pointers.
+    •	Enumerations (enum): Organizing codebases cleanly using named, human-readable structural integers.
+9. Dynamic Memory Allocation (DMA):
+    •	Heap Management Operators: Requesting custom runtime raw heap memory using malloc() and initialized memory using calloc().
+    •	Dynamic Resizing: Modifying heap allocation boundaries dynamically using realloc().
+    •	Memory Hygiene: Mitigating program crashes and memory leaks by releasing allocations cleanly via free().
+    •	Common Pitfalls: Debugging and avoiding wild pointers, dangling pointers, double-free faults, and buffer overflow attacks.
+10. Direct File Handling Operations:
+    •	File Stream Lifecycle: Initializing and concluding hard-drive pipelines using standard stream controls fopen() and fclose().
+    •	Text File Parsing: Translating text payloads via basic disk stream readers fprintf(), fscanf(), fgets(), and fputs().
+    •	Binary Stream Blocks: Exporting and importing raw hardware data buffers into persistent blocks using fwrite() and fread().
+    •	Stream Pointer Seek & Tell: Jumping tracking vectors across physical file indices via fseek(), ftell(), and resetting them using rewind().
+11. Preprocessor Metaprogramming:
+    •	Macro Text Replacements: Writing static value definitions and functional code wrappers with #define.
+    •	Advanced Macro Operators: Stringification (#) and token pasting (##) to dynamically generate code at compile time.
+    •	Conditional Compilation Guards: Preventing header collisions and isolating environment compilation paths using #ifdef, #ifndef, #else, and #endif.
+    •	Diagnostics & Pragmas: Injecting manual pipeline compile alerts and instructions via #error and #pragma.
+12. Advanced OS-Level & Hardware Interactions:
+    •	Command Line Integration: Capturing OS argument arrays directly through main(int argc, char *argv[]).
+    •	Generic Abstractions (void *): Writing polymorphic functions and algorithms using type-agnostic Void Pointers.
+    •	Type Qualifiers: Ensuring precise data reads with volatile (stops aggressive compiler caching on hardware registries) and restrict (guarantees strict pointer aliasing isolation).
+    •	Variadic Interfaces: Designing custom functions that handle flexible argument numbers via <stdarg.h> (va_list, va_start, va_arg, va_end).
+    •	Low-Level Error Handling: Polling standard diagnostic system metrics through errno, perror(), and string translations via strerror().
+    •	Non-local Jumps: Bypassing traditional function stack call constraints during system recovery cycles via <setjmp.h> (setjmp(), longjmp()).
+    •	Multithreading & Concurrency: Spawning and managing multiple execution paths concurrently using POSIX Threads (<pthread.h>) or standard C11 threads (<threads.h>).

@@ -1,0 +1,4 @@
+// 01_Heap_Management_Operators: Requesting custom runtime raw heap memory using malloc() and initialized memory using calloc().
+// 02_Dynamic_Resizing: Modifying heap allocation boundaries dynamically using realloc().
+// 03_Memory_Hygiene: Mitigating program crashes and memory leaks by releasing allocations cleanly via free().
+// 04_Common_Pitfalls: Debugging and avoiding wild pointers, dangling pointers, double-free faults, and buffer overflow attacks.

@@ -1,0 +1,7 @@
+// 01_Command_Line_Integration: Capturing OS argument arrays directly through main(int argc, char *argv[]).
+// 02_Generic_Abstractions: Writing polymorphic functions and algorithms using type agnostic Void Pointers.
+// 03_Type_Qualifiers: Ensuring precise data reads with volatile (stops aggressive compiler caching on hardware registries) and restrict (guarantees strict pointer aliasing isolation).
+// 04_Variadic_Interfaces: Designing custom functions that handle flexible argument numbers via <stdarg.h> (va_list, va_start, va_arg, va_end).
+// 05_Low_Level_Error_Handling: Polling standard diagnostic system metrics through errno, perror(), and string translations via strerror().
+// 06_Non_local_Jumps: Bypassing traditional function stack call constraints during system recovery cycles via <setjmp.h> (setjmp(), longjmp()).
+// 07_Multithreading_and_Concurrency: Spawning and managing multiple execution paths concurrently using POSIX Threads (<pthread.h>) or standard C11 threads (<threads.h>).

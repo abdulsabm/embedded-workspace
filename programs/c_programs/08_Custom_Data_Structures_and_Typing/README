@@ -1,0 +1,6 @@
+// 01_Structures: Bundling heterogeneous primitive groups, structure padding behaviors, and structural size packing (#pragma pack).
+// 02_Structure_Pointers: Accessing nested elements cleanly via the arrow selection syntax (->).
+// 03_Unions: Optimizing footprint tracking where nested elements dynamically share identical hardware memory addresses.
+// 04_Bit_Fields: Defining specific bit-widths inside custom structures to fit raw data payloads tightly.
+// 05_Type_Aliasing: Packaging clean alias abstractions for obscure structure definitions and complex pointers.
+// 06_Enumerations: Organizing codebases cleanly using named, human-readable structural integers.

@@ -1,0 +1,5 @@
+// 01_One_Dimensional_Arrays: Memory-contiguous sequences of scalar blocks, initialization tricks, and indexing loops.
+// 02_Multi_Dimensional_Arrays: Multi-axis contiguous data tracking (e.g., 2D matrices, 3D spatial grids) and their linear memory layouts.
+// 03_Null_Terminated_Strings: Handling textual data as standard null-terminated (\0) character sequences.
+// 04_Standard_String_Library: Deep-dive implementations of string metrics and manipulations: strlen(), strcpy(), strncpy(), strcat(), strcmp(), strchr(), and strstr().
+// 05_String_Parsing: Splitting and decoding complex text arrays with tokenizers like strtok() or formatted readers like sscanf().

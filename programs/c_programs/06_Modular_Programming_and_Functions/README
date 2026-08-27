@@ -1,0 +1,4 @@
+// 01_Function_Architecture: Writing clean separation signatures via declarations (prototypes) and implementations.
+// 02_Parameter_Passing_Dynamics: Evaluating runtime differences between Pass-by-Value and Pass-by-Reference (via memory addresses).
+// 03_Recursion: Coding mathematical self calling functions, structural termination safety, and tracking Stack Overflow risks.
+// 04_Storage_Classes: Managing tracking variables across system lifetimes using auto, register, static, and globally shared extern declarations.

@@ -1,0 +1,5 @@
+// 01_Basic_IO_Operations: Formatted stream interactions using printf(), scanf(), and unformatted operations like putchar(), getchar(), puts(), and gets_s().
+// 02_Fundamental_Data_Types: Size, range, and behavior of standard types: char, int, float, double.
+// 03_Type_Modifiers: Altering data ranges and properties using signed, unsigned, short, and long.
+// 04_Fixed_Width_Integer_Types: Using modern portable standards from <stdint.h> (e.g., uint32_t, int16_t).
+// 05_Constants_and_Literals: Defining immutable values via #define, const, hexadecimals (0x), octals (0), and binaries (0b).

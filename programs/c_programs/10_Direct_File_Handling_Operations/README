@@ -1,0 +1,4 @@
+// 01_File_Stream_Lifecycle: Initializing and concluding hard-drive pipelines using standard stream controls fopen() and fclose().
+// 02_Text_File_Parsing: Translating text payloads via basic disk stream readers fprintf(), fscanf(), fgets(), and fputs().
+// 03_Binary_Stream_Blocks: Exporting and importing raw hardware data buffers into persistent blocks using fwrite() and fread().
+// 04_Stream_Pointer_Seek_and_Tell: Jumping tracking vectors across physical file indices via fseek(), ftell(), and resetting them using rewind().

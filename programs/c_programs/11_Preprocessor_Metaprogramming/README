@@ -1,0 +1,4 @@
+// 01_Macro_Text_Replacements: Writing static value definitions and functional code wrappers with #define.
+// 02_Advanced_Macro_Operators: Stringification (#) and token pasting (##) to dynamically generate code at compile time.
+// 03_Conditional_Compilation_Guards: Preventing header collisions and isolating environment compilation paths using #ifdef, #ifndef, #else, and #endif.
+// 04_Diagnostics_and_Pragmas: Injecting manual pipeline compile alerts and instructions via #error and #pragma.
