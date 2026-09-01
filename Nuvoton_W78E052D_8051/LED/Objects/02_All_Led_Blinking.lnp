@@ -1,0 +1,5 @@
+".\Objects\STARTUP.obj",
+".\Objects\02_All_Led_Blinking.obj" 
+TO ".\Objects\02_All_Led_Blinking" 
+
+PRINT(".\Listings\02_All_Led_Blinking.map")
