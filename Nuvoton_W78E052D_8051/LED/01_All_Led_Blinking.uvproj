@@ -46,7 +46,7 @@
             <InvalidFlash>1</InvalidFlash>
           </TargetStatus>
           <OutputDirectory>.\Objects\</OutputDirectory>
-          <OutputName>02_All_Led_Blinking</OutputName>
+          <OutputName>01_All_Led_Blinking</OutputName>
           <CreateExecutable>1</CreateExecutable>
           <CreateLib>0</CreateLib>
           <CreateHexFile>1</CreateHexFile>
@@ -382,9 +382,9 @@
               <FilePath>.\STARTUP.A51</FilePath>
             </File>
             <File>
-              <FileName>02_All_Led_Blinking.c</FileName>
+              <FileName>01_All_Led_Blinking.c</FileName>
               <FileType>1</FileType>
-              <FilePath>.\02_All_Led_Blinking.c</FilePath>
+              <FilePath>.\01_All_Led_Blinking.c</FilePath>
             </File>
           </Files>
         </Group>

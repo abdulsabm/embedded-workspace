@@ -1,0 +1,4 @@
+".\Objects\STARTUP.obj",
+".\Objects\01_4_digit_continues_led_counter.obj" 
+TO ".\Objects\01_4_digit_continues_led_counter" 
+PRINT(".\Listings\01_4_digit_continues_led_counter.m51") RAMSIZE(256) 

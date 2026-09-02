@@ -1,0 +1,43 @@
+C51 COMPILER V9.60.7.0   01_BUZZER                                                         09/02/2026 22:22:28 PAGE 1   
+
+
+C51 COMPILER V9.60.7.0, COMPILATION OF MODULE 01_BUZZER
+OBJECT MODULE PLACED IN .\Objects\01_buzzer.obj
+COMPILER INVOKED BY: C:\Keil_v5\C51\BIN\C51.EXE 01_buzzer.c OPTIMIZE(8,SPEED) BROWSE DEBUG OBJECTEXTEND PRINT(.\Listings
+                    -\01_buzzer.lst) TABS(2) OBJECT(.\Objects\01_buzzer.obj)
+
+line level    source
+
+   1          #include "reg51.h"
+   2          #include "../include.h"
+   3          
+   4          sbit PORT_P00 = P0^0;
+   5          
+   6          void buzzer_toggle(int buzzer_delay){
+   7   1          PORT_P00 = 0x0;
+   8   1          delay(buzzer_delay);
+   9   1          PORT_P00 = 0x1;
+  10   1          delay(buzzer_delay);
+  11   1      }
+  12          
+  13          void main(){
+  14   1          int i = 50;
+  15   1          while(1){
+  16   2              buzzer_toggle(i);
+  17   2              i += 50;
+  18   2          }
+  19   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =     65    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

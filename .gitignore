@@ -5,17 +5,7 @@ __pycache__/
 venv/
 
 # C / Embedded Build Artifacts
-build/
-bin/
-obj/
-.pio/
-CMakeCache.txt
-CMakeFiles/
-*.elf
-*.bin
-*.hex
-*.map
-*.exe
+
 
 # IDE files
 .vscode/

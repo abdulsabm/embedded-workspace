@@ -1,0 +1,63 @@
+C51 COMPILER V9.60.7.0   01_4_DIGIT_CONTINUES_LED_COUNTER                                  09/02/2026 21:56:44 PAGE 1   
+
+
+C51 COMPILER V9.60.7.0, COMPILATION OF MODULE 01_4_DIGIT_CONTINUES_LED_COUNTER
+OBJECT MODULE PLACED IN .\Objects\01_4_digit_continues_led_counter.obj
+COMPILER INVOKED BY: C:\Keil_v5\C51\BIN\C51.EXE 01_4_digit_continues_led_counter.c OPTIMIZE(8,SPEED) BROWSE DEBUG OBJECT
+                    -EXTEND PRINT(.\Listings\01_4_digit_continues_led_counter.lst) TABS(2) OBJECT(.\Objects\01_4_digit_continues_led_counter.
+                    -obj)
+
+line level    source
+
+   1          #include "reg51.h"
+   2          #include "../include.h"
+   3          #include "01_4_digit_led_counter.h"
+   4          
+   5          #define LED_P1 P1 // 7th(Port* of 7) bit should be zero if decimal point is required.
+   6          #define LED_P0 P0
+   7          
+   8          void main(){
+   9   1          int sg1 = 0, sg2 = 1, sg3 = 1, sg4 = 1;
+  10   1          while(1){
+  11   2              LED_P0 = (LED_4); // Enable all 4 digits of 7 segment led display.
+  12   2              LED_P1 = (DIGIT_MAP[sg1] | (~Decimal_Point)); //if we want decimal point the remove ~ and replcae 
+             -| with &.
+  13   2              if(sg1 == 10){
+  14   3                  sg1 = 0;
+  15   3                  LED_P0 = (LED_3); // Enable all 4 digits of 7 segment led display.
+  16   3                  LED_P1 = (DIGIT_MAP[sg2] | (~Decimal_Point)); //if we want decimal point the remove ~ and repl
+             -cae | with &.
+  17   3                  sg2++;
+  18   3              }
+  19   2              sg1++;
+  20   2              if(sg2 == 11){
+  21   3                  sg2 = 1;
+  22   3                  LED_P0 = (LED_2); // Enable all 4 digits of 7 segment led display.
+  23   3                  LED_P1 = (DIGIT_MAP[sg3] | (~Decimal_Point)); //if we want decimal point the remove ~ and repl
+             -cae | with &.
+  24   3                  sg3++;
+  25   3              }
+  26   2              if(sg3 == 11){
+  27   3                  sg3 = 1;
+  28   3                  LED_P0 = (LED_1); // Enable all 4 digits of 7 segment led display.
+  29   3                  LED_P1 = (DIGIT_MAP[sg4] | (~Decimal_Point)); //if we want decimal point the remove ~ and repl
+             -cae | with &.
+  30   3                  sg4++;
+  31   3              }
+  32   2              delay(100);
+  33   2          }
+  34   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    216    ----
+   CONSTANT SIZE    =     10    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----       8
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

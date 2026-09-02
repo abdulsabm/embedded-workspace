@@ -1,0 +1,42 @@
+C51 COMPILER V9.60.7.0   01_4_DIGIT_LED_COUNTER                                            09/02/2026 20:07:42 PAGE 1   
+
+
+C51 COMPILER V9.60.7.0, COMPILATION OF MODULE 01_4_DIGIT_LED_COUNTER
+OBJECT MODULE PLACED IN .\Objects\01_4_digit_led_counter.obj
+COMPILER INVOKED BY: C:\Keil_v5\C51\BIN\C51.EXE 01_4_digit_led_counter.c OPTIMIZE(8,SPEED) BROWSE DEBUG OBJECTEXTEND PRI
+                    -NT(.\Listings\01_4_digit_led_counter.lst) TABS(2) OBJECT(.\Objects\01_4_digit_led_counter.obj)
+
+line level    source
+
+   1          #include "reg51.h"
+   2          #include "../include.h"
+   3          #include "01_4_digit_led_counter.h"
+   4          
+   5          #define LED_P1 P1 // 7th(Port* of 7) bit should be zero if decimal point is required.
+   6          #define LED_P0 P0 
+   7          
+   8          void main(){
+   9   1          LED_P0 = (LED_4|LED_3|LED_2|LED_1); // Enable all 4 digits of 7 segment led display.
+  10   1          while(1){
+  11   2              int i;
+  12   2              for(i = 0;i <10;i++){
+  13   3                  LED_P1 = (DIGIT_MAP[i] | (~Decimal_Point)); //if we want decimal point the remove ~ and replca
+             -e | with &.
+  14   3                  delay(500);
+  15   3              }
+  16   2          }
+  17   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =     86    ----
+   CONSTANT SIZE    =     10    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----       2
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)
