@@ -1,0 +1,28 @@
+C51 COMPILER V9.60.7.0   INCLUDE                                                           09/11/2026 20:49:42 PAGE 1   
+
+
+C51 COMPILER V9.60.7.0, COMPILATION OF MODULE INCLUDE
+OBJECT MODULE PLACED IN .\Objects\include.obj
+COMPILER INVOKED BY: C:\Keil_v5\C51\BIN\C51.EXE ..\include.c OPTIMIZE(8,SPEED) BROWSE DEBUG OBJECTEXTEND PRINT(.\Listing
+                    -s\include.lst) TABS(2) OBJECT(.\Objects\include.obj)
+
+line level    source
+
+   1          void delay(unsigned int ms){
+   2   1        unsigned int i, j;
+   3   1         for(i = 0; i < ms; i++) for(j = 0; j <= 120; j++);
+   4   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =     32    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

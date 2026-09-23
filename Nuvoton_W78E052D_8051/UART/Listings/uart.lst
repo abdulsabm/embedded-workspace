@@ -1,0 +1,223 @@
+C51 COMPILER V9.60.7.0   UART                                                              09/16/2026 21:23:59 PAGE 1   
+
+
+C51 COMPILER V9.60.7.0, COMPILATION OF MODULE UART
+OBJECT MODULE PLACED IN .\Objects\uart.obj
+COMPILER INVOKED BY: C:\Keil_v5\C51\BIN\C51.EXE uart.c OPTIMIZE(8,SPEED) BROWSE DEBUG OBJECTEXTEND PRINT(.\Listings\uart
+                    -.lst) TABS(2) OBJECT(.\Objects\uart.obj)
+
+line level    source
+
+   1          #include "uart.h"
+   2          
+   3          // Instantiate Global Variables
+   4          uart_fifo_t rx_fifo;
+   5          uart_stats_t uart_stats;
+   6          
+   7          // ===================================================================
+   8          // CORE UART DRIVER FUNCTION DEFINITIONS
+   9          // ===================================================================
+  10          
+  11          /**
+  12           * @brief Standard Initialization (Mode 1: 8-bit variable baud rate)
+  13           */
+  14          void UART_Init(unsigned long baudrate, unsigned char double_baud) {
+  15   1          UART_Init_Advanced(UART_MODE_1, baudrate, double_baud);
+  16   1      }
+  17          
+  18          /**
+  19           * @brief Advanced Initialization supporting all 4 UART Modes
+  20           */
+  21          void UART_Init_Advanced(unsigned char mode, unsigned long baudrate, unsigned char double_baud) {
+  22   1          unsigned char reload_val = 0;
+  23   1      
+  24   1          // Configure SMOD Bit in PCON
+  25   1          if (double_baud) {
+  26   2              PCON |= 0x80;  // SMOD = 1
+  27   2              if (baudrate > 0) {
+  28   3                  reload_val = (unsigned char)(256 - (FREQ_OSC / (192UL * baudrate)));
+  29   3              }
+  30   2          } else {
+  31   2              PCON &= ~0x80; // SMOD = 0
+  32   2              if (baudrate > 0) {
+  33   3                  reload_val = (unsigned char)(256 - (FREQ_OSC / (384UL * baudrate)));
+  34   3              }
+  35   2          }
+  36   1      
+  37   1          // Configure Timer 1 only for Modes 1 and 3 (Variable Baud)
+  38   1          if (mode == UART_MODE_1 || mode == UART_MODE_3) {
+  39   2              TMOD &= 0x0F;
+  40   2              TMOD |= 0x20; // Timer 1 Mode 2 (8-bit Auto-Reload)
+  41   2              TH1 = reload_val;
+  42   2              TL1 = reload_val;
+  43   2              TR1 = 1;      // Start Timer 1
+  44   2          }
+  45   1      
+  46   1          // Assign Hardware Serial Mode (SCON)
+  47   1          SCON = mode;
+  48   1      
+  49   1          // Reset FIFO & Diagnostics
+  50   1          FIFO_Init();
+  51   1          uart_stats.rx_count = 0;
+  52   1          uart_stats.tx_count = 0;
+  53   1      
+  54   1          ES = 1; // Enable Serial Interrupt
+C51 COMPILER V9.60.7.0   UART                                                              09/16/2026 21:23:59 PAGE 2   
+
+  55   1          EA = 1; // Enable Global Interrupts
+  56   1      }
+  57          
+  58          /**
+  59           * @brief Transmits a single character/byte over UART.
+  60           */
+  61          void UART_TxChar(unsigned char ch) {
+  62   1          SBUF = ch;
+  63   1          while (!TI); // Wait for transmission complete flag
+  64   1          TI = 0;      // Clear flag
+  65   1          uart_stats.tx_count++;
+  66   1      }
+  67          
+  68          /**
+  69           * @brief Transmits a null-terminated string.
+  70           */
+  71          void UART_TxString(const char *str) {
+  72   1          while (*str) {
+  73   2              UART_TxChar(*str++);
+  74   2          }
+  75   1      }
+  76          
+  77          /**
+  78           * @brief Transmits an unsigned integer as ASCII text.
+  79           */
+  80          void UART_TxNumber(unsigned int num) {
+  81   1          char buf[6];
+  82   1          int i = 0;
+  83   1      
+  84   1          if (num == 0) {
+  85   2              UART_TxChar('0');
+  86   2              return;
+  87   2          }
+  88   1      
+  89   1          while (num > 0) {
+  90   2              buf[i++] = (num % 10) + '0';
+  91   2              num /= 10;
+  92   2          }
+  93   1      
+  94   1          while (i > 0) {
+  95   2              UART_TxChar(buf[--i]);
+  96   2          }
+  97   1      }
+  98          
+  99          /**
+ 100           * @brief Transmits an 8-bit byte as Hexadecimal (0x00 - 0xFF).
+ 101           */
+ 102          void UART_TxHex(unsigned char val) {
+ 103   1          unsigned char nibble;
+ 104   1          
+ 105   1          UART_TxString("0x");
+ 106   1          
+ 107   1          // High Nibble
+ 108   1          nibble = (val >> 4) & 0x0F;
+ 109   1          UART_TxChar(nibble < 10 ? (nibble + '0') : (nibble - 10 + 'A'));
+ 110   1          
+ 111   1          // Low Nibble
+ 112   1          nibble = val & 0x0F;
+ 113   1          UART_TxChar(nibble < 10 ? (nibble + '0') : (nibble - 10 + 'A'));
+ 114   1      }
+ 115          
+ 116          // ===================================================================
+C51 COMPILER V9.60.7.0   UART                                                              09/16/2026 21:23:59 PAGE 3   
+
+ 117          // 9-BIT MODE FUNCTION DEFINITIONS (Mode 2 & Mode 3)
+ 118          // ===================================================================
+ 119          
+ 120          /**
+ 121           * @brief Transmits 9-bit word (TB8 loaded from bit 8).
+ 122           */
+ 123          void UART_Tx9Bit(unsigned int data_word) {
+ 124   1          TB8 = (data_word & 0x0100) ? 1 : 0; // Bit 8 assigned to TB8
+ 125   1          SBUF = (unsigned char)(data_word & 0x00FF);
+ 126   1          while (!TI);
+ 127   1          TI = 0;
+ 128   1          uart_stats.tx_count++;
+ 129   1      }
+ 130          
+ 131          /**
+ 132           * @brief Fetches 9-bit word from Software FIFO.
+ 133           */
+ 134          int UART_Rx9Bit(unsigned int *data_word) {
+ 135   1          return FIFO_Get(data_word);
+ 136   1      }
+ 137          
+ 138          // ===================================================================
+ 139          // SOFTWARE FIFO RING BUFFER FUNCTION DEFINITIONS
+ 140          // ===================================================================
+ 141          
+ 142          void FIFO_Init(void) {
+ 143   1          rx_fifo.head = 0;
+ 144   1          rx_fifo.tail = 0;
+ 145   1          rx_fifo.overflow = 0;
+ 146   1      }
+ 147          
+ 148          void FIFO_Put(unsigned int data_word) {
+ 149   1          unsigned char next = (rx_fifo.head + 1) % BUFFER_SIZE;
+ 150   1          if (next != rx_fifo.tail) {
+ 151   2              rx_fifo.buffer[rx_fifo.head] = data_word;
+ 152   2              rx_fifo.head = next;
+ 153   2          } else {
+ 154   2              rx_fifo.overflow = 1; // FIFO Full Error
+ 155   2          }
+ 156   1      }
+ 157          
+ 158          int FIFO_Get(unsigned int *data_word) {
+ 159   1          if (rx_fifo.head == rx_fifo.tail) {
+ 160   2              return 0; // Buffer Empty
+ 161   2          }
+ 162   1          *data_word = rx_fifo.buffer[rx_fifo.tail];
+ 163   1          rx_fifo.tail = (rx_fifo.tail + 1) % BUFFER_SIZE;
+ 164   1          return 1;
+ 165   1      }
+ 166          
+ 167          unsigned char FIFO_IsEmpty(void) {
+ 168   1          return (rx_fifo.head == rx_fifo.tail);
+ 169   1      }
+ 170          
+ 171          unsigned char FIFO_IsFull(void) {
+ 172   1          return (((rx_fifo.head + 1) % BUFFER_SIZE) == rx_fifo.tail);
+ 173   1      }
+ 174          
+ 175          // ===================================================================
+ 176          // INTERRUPT SERVICE ROUTINE (ISR)
+ 177          // ===================================================================
+ 178          
+C51 COMPILER V9.60.7.0   UART                                                              09/16/2026 21:23:59 PAGE 4   
+
+ 179          /**
+ 180           * @brief UART Interrupt Service Routine (Vector 4 / Address 0x0023)
+ 181           */
+ 182          void UART_ISR(void) interrupt 4 {
+ 183   1          if (RI) {
+ 184   2              unsigned int rx_word;
+ 185   2              RI = 0; // Clear receive interrupt flag
+ 186   2              
+ 187   2              // Capture RB8 (Bit 8) and SBUF (Low Byte) atomically
+ 188   2              rx_word = ((unsigned int)RB8 << 8) | SBUF;
+ 189   2              
+ 190   2              FIFO_Put(rx_word);
+ 191   2              uart_stats.rx_count++;
+ 192   2          }
+ 193   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    613    ----
+   CONSTANT SIZE    =      3    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =     45      25
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

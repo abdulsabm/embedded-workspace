@@ -1,0 +1,122 @@
+C51 COMPILER V9.60.7.0   TEST_UART                                                         09/16/2026 22:04:29 PAGE 1   
+
+
+C51 COMPILER V9.60.7.0, COMPILATION OF MODULE TEST_UART
+OBJECT MODULE PLACED IN .\Objects\test_uart.obj
+COMPILER INVOKED BY: C:\Keil_v5\C51\BIN\C51.EXE test_uart.c OPTIMIZE(8,SPEED) BROWSE DEBUG OBJECTEXTEND PRINT(.\Listings
+                    -\test_uart.lst) TABS(2) OBJECT(.\Objects\test_uart.obj)
+
+line level    source
+
+   1          #include "uart.h"
+   2          
+   3          // ===================================================================
+   4          // GLOBAL VARIABLE DEFINITIONS (Matching uart.h declarations)
+   5          // ===================================================================
+   6          uart_fifo_t rx_fifo = {{0}, 0, 0, 0};
+   7          uart_stats_t uart_stats = {0, 0, 0, 0}; // Name matched to uart.h
+   8          
+   9          // ===================================================================
+  10          // DIAGNOSTIC & TEST SUITE FUNCTION DEFINITIONS
+  11          // ===================================================================
+  12          
+  13          /**
+  14           * @brief Runs an interactive Echo test back to the host PC.
+  15           */
+  16          void UART_Test_Echo(void) {
+  17   1          unsigned int rx_word; // Changed to unsigned int for 16-bit FIFO
+  18   1          unsigned char byte;
+  19   1          
+  20   1          UART_TxString("\r\n--- [TEST] Echo Loop Active (Send 5 characters from PC) ---\r\n");
+  21   1          {
+  22   2              unsigned char count = 0;
+  23   2              while (count < 5) {
+  24   3                  if (FIFO_Get(&rx_word)) { // Pass pointer to 16-bit word
+  25   4                      byte = (unsigned char)(rx_word & 0x00FF); // Extract 8-bit payload
+  26   4                      
+  27   4                      UART_TxString("Received HEX: ");
+  28   4                      UART_TxHex(byte);
+  29   4                      UART_TxString(" | ASCII: '");
+  30   4                      UART_TxChar(byte);
+  31   4                      UART_TxString("'\r\n");
+  32   4                      count++;
+  33   4                  }
+  34   3              }
+  35   2          }
+  36   1      }
+  37          
+  38          /**
+  39           * @brief Tests baud rate re-initialization and SMOD toggle.
+  40           */
+  41          void UART_Test_BaudRates(void) {
+  42   1          UART_TxString("\r\n--- [TEST] Testing 9600 Baud Rate ---\r\n");
+  43   1          UART_Init(9600, BAUD_NORMAL);
+  44   1          UART_TxString("9600 Baud OK!\r\n");
+  45   1      
+  46   1          // delay(200); // Fixed function name
+  47   1      
+  48   1          UART_TxString("\r\n--- [TEST] Testing 19200 Baud Rate (SMOD = 1) ---\r\n");
+  49   1          UART_Init(9600, BAUD_DOUBLE); // Double baud mode
+  50   1          UART_TxString("19200 Baud OK!\r\n");
+  51   1      
+  52   1          // delay(200); // Fixed function name
+  53   1          UART_Init(9600, BAUD_NORMAL); // Revert back to standard 9600
+  54   1      }
+C51 COMPILER V9.60.7.0   TEST_UART                                                         09/16/2026 22:04:29 PAGE 2   
+
+  55          
+  56          /**
+  57           * @brief Prints current UART metrics and hardware error flags.
+  58           */
+  59          void UART_PrintStats(void) {
+  60   1          UART_TxString("\r\n================ UART METRICS ================\r\n");
+  61   1          UART_TxString("TX Byte Count : ");
+  62   1          UART_TxNumber(uart_stats.tx_count); // Fixed variable name
+  63   1          UART_TxString("\r\nRX Byte Count : ");
+  64   1          UART_TxNumber(uart_stats.rx_count); // Fixed variable name
+  65   1          UART_TxString("\r\nFIFO Overflow : ");
+  66   1          UART_TxString(rx_fifo.overflow ? "YES (Error)" : "NO (OK)");
+  67   1          UART_TxString("\r\n=============================================\r\n");
+  68   1      }
+  69          
+  70          // ===================================================================
+  71          // MAIN ROUTINE
+  72          // ===================================================================
+  73          void main(void) {
+  74   1          // 1. MUST Initialize UART Hardware Peripheral First!
+  75   1          UART_Init(9600, BAUD_NORMAL);
+  76   1          
+  77   1          // delay(100);
+  78   1      
+  79   1          // 2. Execute Diagnostics Sequences
+  80   1          UART_TxString("\r\n=============================================\r\n");
+  81   1          UART_TxString("  Nuvoton W78E052D UART Test Runner Started   \r\n");
+  82   1          UART_TxString("=============================================\r\n");
+  83   1      
+  84   1          UART_Test_BaudRates();
+  85   1          UART_Test_Echo();
+  86   1          UART_PrintStats();
+  87   1      
+  88   1          // 3. Continuous Execution Loopback
+  89   1          UART_TxString("\r\n[INFO] Test Suite Complete. Entering Loopback Mode...\r\n");
+  90   1          while (1) {
+  91   2              unsigned int rx_data;
+  92   2              if (FIFO_Get(&rx_data)) {
+  93   3                  UART_TxChar((unsigned char)(rx_data & 0x00FF)); // Echo back byte
+  94   3              }
+  95   2          }
+  96   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    309    ----
+   CONSTANT SIZE    =    555    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =     45       6
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

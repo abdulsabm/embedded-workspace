@@ -1,0 +1,5 @@
+".\Objects\STARTUP.obj",
+".\Objects\test_uart.obj",
+".\Objects\include.obj" 
+TO ".\Objects\test_uart" 
+PRINT(".\Listings\test_uart.m51") RAMSIZE(256) 

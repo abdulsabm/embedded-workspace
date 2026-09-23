@@ -1,5 +1,4 @@
-void delay(unsigned int ms){
-	
-	unsigned int i, j;
-   for(i = 0; i < ms; i++) for(j = 0; j <= 120; j++);
-}
+#define ENABLE 0
+#define DISABLE 1
+
+void delay(unsigned int ms);

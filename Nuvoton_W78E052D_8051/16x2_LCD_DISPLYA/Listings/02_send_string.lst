@@ -1,0 +1,47 @@
+C51 COMPILER V9.60.7.0   02_SEND_STRING                                                    09/11/2026 20:49:42 PAGE 1   
+
+
+C51 COMPILER V9.60.7.0, COMPILATION OF MODULE 02_SEND_STRING
+OBJECT MODULE PLACED IN .\Objects\02_send_string.obj
+COMPILER INVOKED BY: C:\Keil_v5\C51\BIN\C51.EXE 02_send_string.c OPTIMIZE(8,SPEED) BROWSE DEBUG OBJECTEXTEND PRINT(.\Lis
+                    -tings\02_send_string.lst) TABS(2) OBJECT(.\Objects\02_send_string.obj)
+
+line level    source
+
+   1          #include "lcd.h"
+   2          #include "../include.h"
+   3          
+   4          void main(){
+   5   1          const signed char ch = 'H';
+   6   1          unsigned int count = 0;
+   7   1      
+   8   1          set_lcd_command(FUNCTION_SET_2_LINE_5X7);
+   9   1          clear_display();
+  10   1          set_lcd_cursor(1,2); // Move cursor to line 1, position 7
+  11   1          send_character_to_lcd(ch);
+  12   1          set_lcd_cursor(2,3); // Move cursor to line 2, position 3
+  13   1          send_string_to_lcd("Hello, World!");
+  14   1          set_lcd_cursor(1,10); // Move cursor to line 1, position 2
+  15   1          send_number_to_lcd(8765);
+  16   1      
+  17   1          while(1){
+  18   2              delay(25);
+  19   2              set_lcd_cursor(1,10); // Move cursor to line 1, position 2
+  20   2              send_number_to_lcd(count++);
+  21   2          }
+  22   1      }
+*** WARNING C316 IN LINE 22 OF 02_send_string.c: unterminated conditionals
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =     89    ----
+   CONSTANT SIZE    =     14    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----       3
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  1 WARNING(S),  0 ERROR(S)

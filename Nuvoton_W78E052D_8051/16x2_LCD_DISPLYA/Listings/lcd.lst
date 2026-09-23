@@ -1,0 +1,80 @@
+C51 COMPILER V9.60.7.0   LCD                                                               09/11/2026 20:49:42 PAGE 1   
+
+
+C51 COMPILER V9.60.7.0, COMPILATION OF MODULE LCD
+OBJECT MODULE PLACED IN .\Objects\lcd.obj
+COMPILER INVOKED BY: C:\Keil_v5\C51\BIN\C51.EXE lcd.c OPTIMIZE(8,SPEED) BROWSE DEBUG OBJECTEXTEND PRINT(.\Listings\lcd.l
+                    -st) TABS(2) OBJECT(.\Objects\lcd.obj)
+
+line level    source
+
+   1          #include "lcd.h"
+   2          #include "../include.h"
+   3          
+   4          void set_lcd_command(unsigned char command){
+   5   1          RS = ENABLE; // Set RS to 0 for command mode enable
+   6   1          RW = ENABLE; // Set RW to 0 for write mode enable
+   7   1          LCD_PORT = command; // Set the command pins to the specified command
+   8   1          delay(1);
+   9   1          EN = ENABLE;
+  10   1          delay(1);
+  11   1          EN = DISABLE;
+  12   1      }
+  13          
+  14          void send_character_to_lcd(const signed char dat){
+  15   1          RS = DISABLE; // Set RS to 1 for command mode disable
+  16   1          RW = ENABLE; // Set RW to 1 for write mode disable
+  17   1          LCD_PORT = dat; // Set the data pins to the specified data
+  18   1          delay(1);
+  19   1          EN = ENABLE;
+  20   1          delay(1);
+  21   1          EN = DISABLE;
+  22   1      }
+  23          
+  24          void send_string_to_lcd(const char* str){
+  25   1          while(*str){
+  26   2              send_character_to_lcd(*str); // Send each character in the string to the LCD
+  27   2              str++; // Move to the next character in the string
+  28   2          }
+  29   1      }
+  30          
+  31          void set_lcd_cursor(unsigned char line, unsigned char position){
+  32   1          unsigned char command = (line == 1)? 0x80:0xC0; // Base command for setting cursor position
+  33   1          set_lcd_command((command|position)); // Set the cursor position on the LCD
+  34   1      }
+  35          
+  36          void send_number_to_lcd(unsigned int value){
+  37   1          unsigned int digit = 0, count = 0;
+  38   1          int arr_cnt = 4;
+  39   1          unsigned int arr[5] = {0}; // Array to hold the digits of the number
+  40   1          while(value > 0){
+  41   2              arr[count] = value % 10; // Get the last digit of the number
+  42   2              value /= 10; // Remove the last digit from the number
+  43   2              count++;
+  44   2          }
+  45   1          while((arr_cnt>=0)){
+  46   2              send_character_to_lcd(arr[arr_cnt] + '0'); // Convert digit to character and send to LCD
+  47   2              arr_cnt--;
+  48   2          }
+  49   1      }
+  50          
+  51          void clear_display(){
+  52   1          set_lcd_command(CLEAR_DISPLAY); // Clear the LCD display
+  53   1      } 
+*** WARNING C316 IN LINE 53 OF lcd.c: unterminated conditionals
+C51 COMPILER V9.60.7.0   LCD                                                               09/11/2026 20:49:42 PAGE 2   
+
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    234    ----
+   CONSTANT SIZE    =     10    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----      21
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  1 WARNING(S),  0 ERROR(S)

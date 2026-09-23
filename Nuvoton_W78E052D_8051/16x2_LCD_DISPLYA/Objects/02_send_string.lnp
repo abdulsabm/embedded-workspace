@@ -1,0 +1,6 @@
+".\Objects\STARTUP.obj",
+".\Objects\02_send_string.obj",
+".\Objects\lcd.obj",
+".\Objects\include.obj" 
+TO ".\Objects\02_send_string" 
+PRINT(".\Listings\02_send_string.m51") RAMSIZE(256) 

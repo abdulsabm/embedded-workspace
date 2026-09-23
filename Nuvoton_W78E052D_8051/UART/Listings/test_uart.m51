@@ -1,0 +1,435 @@
+BL51 BANKED LINKER/LOCATER V6.22.4.0                                                    09/16/2026  22:04:29  PAGE 1
+
+
+BL51 BANKED LINKER/LOCATER V6.22.4.0, INVOKED BY:
+C:\KEIL_V5\C51\BIN\BL51.EXE .\Objects\STARTUP.obj, .\Objects\test_uart.obj, .\Objects\include.obj TO .\Objects\test_uart
+>>  PRINT (.\Listings\test_uart.m51) RAMSIZE (256)
+
+
+MEMORY MODEL: SMALL
+
+
+INPUT MODULES INCLUDED:
+  .\Objects\STARTUP.obj (?C_STARTUP)
+  .\Objects\test_uart.obj (TEST_UART)
+  .\Objects\include.obj (INCLUDE)
+  C:\KEIL_V5\C51\LIB\C51S.LIB (?C_INIT)
+
+
+LINK MAP OF MODULE:  .\Objects\test_uart (?C_STARTUP)
+
+
+            TYPE    BASE      LENGTH    RELOCATION   SEGMENT NAME
+            -----------------------------------------------------
+
+            * * * * * * *   D A T A   M E M O R Y   * * * * * * *
+            REG     0000H     0008H     ABSOLUTE     "REG BANK 0"
+            DATA    0008H     002DH     UNIT         ?DT?TEST_UART
+            DATA    0035H     0006H     UNIT         _DATA_GROUP_
+            IDATA   003BH     0001H     UNIT         ?STACK
+
+            * * * * * * *   C O D E   M E M O R Y   * * * * * * *
+            CODE    0000H     0003H     ABSOLUTE     
+                    0003H     07FDH                  *** GAP ***
+            CODE    0800H     022BH     UNIT         ?CO?TEST_UART
+            CODE    0A2BH     008CH     UNIT         ?C_C51STARTUP
+            CODE    0AB7H     004FH     UNIT         ?PR?MAIN?TEST_UART
+            CODE    0B06H     004EH     UNIT         ?PR?UART_TEST_ECHO?TEST_UART
+            CODE    0B54H     004EH     UNIT         ?PR?UART_PRINTSTATS?TEST_UART
+            CODE    0BA2H     004AH     UNIT         ?PR?UART_TEST_BAUDRATES?TEST_UART
+            CODE    0BECH     0033H     UNIT         ?C_INITSEG
+            CODE    0C1FH     0020H     UNIT         ?PR?_DELAY?INCLUDE
+
+
+
+OVERLAY MAP OF MODULE:   .\Objects\test_uart (?C_STARTUP)
+
+
+SEGMENT                                     DATA_GROUP 
+  +--> CALLED SEGMENT                     START    LENGTH
+---------------------------------------------------------
+?C_C51STARTUP                             -----    -----
+  +--> ?PR?MAIN?TEST_UART
+  +--> ?C_INITSEG
+
+?PR?MAIN?TEST_UART                        0035H    0002H
+  +--> ?CO?TEST_UART
+  +--> ?PR?UART_TEST_BAUDRATES?TEST_UART
+  +--> ?PR?UART_TEST_ECHO?TEST_UART
+  +--> ?PR?UART_PRINTSTATS?TEST_UART
+
+?PR?UART_TEST_BAUDRATES?TEST_UART         -----    -----
+BL51 BANKED LINKER/LOCATER V6.22.4.0                                                  09/16/2026  22:04:29  PAGE 2
+
+
+  +--> ?CO?TEST_UART
+
+?PR?UART_TEST_ECHO?TEST_UART              0037H    0004H
+  +--> ?CO?TEST_UART
+
+?PR?UART_PRINTSTATS?TEST_UART             -----    -----
+  +--> ?CO?TEST_UART
+
+
+
+UNRESOLVED EXTERNAL SYMBOLS:
+   ?_UART_INIT?BYTE
+   _FIFO_GET
+   _UART_INIT
+   _UART_TXCHAR
+   _UART_TXHEX
+   _UART_TXNUMBER
+   _UART_TXSTRING
+
+
+
+SYMBOL TABLE OF MODULE:  .\Objects\test_uart (?C_STARTUP)
+
+  VALUE           TYPE          NAME
+  ----------------------------------
+
+  -------         MODULE        ?C_STARTUP
+  C:0A2BH         SEGMENT       ?C_C51STARTUP
+  I:003BH         SEGMENT       ?STACK
+  C:0000H         PUBLIC        ?C_STARTUP
+  D:00E0H         SYMBOL        ACC
+  D:00F0H         SYMBOL        B
+  D:0083H         SYMBOL        DPH
+  D:0082H         SYMBOL        DPL
+  N:0000H         SYMBOL        IBPSTACK
+  N:0100H         SYMBOL        IBPSTACKTOP
+  N:0080H         SYMBOL        IDATALEN
+  C:0A2EH         SYMBOL        IDATALOOP
+  N:0000H         SYMBOL        PBPSTACK
+  N:0100H         SYMBOL        PBPSTACKTOP
+  N:0000H         SYMBOL        PDATALEN
+  N:0000H         SYMBOL        PDATASTART
+  N:0000H         SYMBOL        PPAGE
+  N:0000H         SYMBOL        PPAGEENABLE
+  D:00A0H         SYMBOL        PPAGE_SFR
+  D:0081H         SYMBOL        SP
+  C:0A2BH         SYMBOL        STARTUP1
+  N:0000H         SYMBOL        XBPSTACK
+  N:0000H         SYMBOL        XBPSTACKTOP
+  N:0000H         SYMBOL        XDATALEN
+  N:0000H         SYMBOL        XDATASTART
+  C:0000H         LINE#         126
+  C:0A2BH         LINE#         133
+  C:0A2DH         LINE#         134
+  C:0A2EH         LINE#         135
+  C:0A2FH         LINE#         136
+  C:0A31H         LINE#         185
+BL51 BANKED LINKER/LOCATER V6.22.4.0                                                  09/16/2026  22:04:29  PAGE 3
+
+
+  C:0A34H         LINE#         196
+  -------         ENDMOD        ?C_STARTUP
+
+  -------         MODULE        TEST_UART
+  C:0000H         SYMBOL        _ICE_DUMMY_
+  C:0BA2H         PUBLIC        UART_Test_BaudRates
+  C:0B06H         PUBLIC        UART_Test_Echo
+  C:0AB7H         PUBLIC        main
+  C:0B54H         PUBLIC        UART_PrintStats
+  D:0008H         PUBLIC        uart_stats
+  D:0012H         PUBLIC        rx_fifo
+  -------         PROC          UART_TEST_ECHO
+  -------         DO            
+  D:0037H         SYMBOL        rx_word
+  D:0039H         SYMBOL        byte
+  -------         DO            
+  D:003AH         SYMBOL        count
+  -------         ENDDO         
+  -------         ENDDO         
+  C:0B06H         LINE#         16
+  C:0B06H         LINE#         20
+  C:0B0FH         LINE#         21
+  C:0B0FH         LINE#         22
+  C:0B12H         LINE#         23
+  C:0B19H         LINE#         24
+  C:0B26H         LINE#         25
+  C:0B2AH         LINE#         27
+  C:0B33H         LINE#         28
+  C:0B38H         LINE#         29
+  C:0B41H         LINE#         30
+  C:0B46H         LINE#         31
+  C:0B4FH         LINE#         32
+  C:0B51H         LINE#         33
+  C:0B51H         LINE#         34
+  C:0B53H         LINE#         35
+  C:0B53H         LINE#         36
+  -------         ENDPROC       UART_TEST_ECHO
+  -------         PROC          UART_TEST_BAUDRATES
+  C:0BA2H         LINE#         41
+  C:0BA2H         LINE#         42
+  C:0BABH         LINE#         43
+  C:0BB7H         LINE#         44
+  C:0BC0H         LINE#         48
+  C:0BC9H         LINE#         49
+  C:0BD7H         LINE#         50
+  C:0BE0H         LINE#         53
+  -------         ENDPROC       UART_TEST_BAUDRATES
+  -------         PROC          UART_PRINTSTATS
+  C:0B54H         LINE#         59
+  C:0B54H         LINE#         60
+  C:0B5DH         LINE#         61
+  C:0B66H         LINE#         62
+  C:0B6DH         LINE#         63
+  C:0B76H         LINE#         64
+  C:0B7DH         LINE#         65
+  C:0B86H         LINE#         66
+  C:0B99H         LINE#         67
+BL51 BANKED LINKER/LOCATER V6.22.4.0                                                  09/16/2026  22:04:29  PAGE 4
+
+
+  -------         ENDPROC       UART_PRINTSTATS
+  -------         PROC          MAIN
+  -------         DO            
+  D:0035H         SYMBOL        rx_data
+  -------         ENDDO         
+  C:0AB7H         LINE#         73
+  C:0AB7H         LINE#         75
+  C:0AC3H         LINE#         80
+  C:0ACCH         LINE#         81
+  C:0AD5H         LINE#         82
+  C:0ADEH         LINE#         84
+  C:0AE1H         LINE#         85
+  C:0AE4H         LINE#         86
+  C:0AE7H         LINE#         89
+  C:0AF0H         LINE#         90
+  C:0AF0H         LINE#         92
+  C:0AFDH         LINE#         93
+  C:0B04H         LINE#         94
+  C:0B04H         LINE#         95
+  -------         ENDPROC       MAIN
+  -------         ENDMOD        TEST_UART
+
+  -------         MODULE        INCLUDE
+  C:0000H         SYMBOL        _ICE_DUMMY_
+  C:0C1FH         PUBLIC        _delay
+  -------         PROC          _DELAY
+  D:0006H         SYMBOL        ms
+  -------         DO            
+  D:0004H         SYMBOL        i
+  D:0002H         SYMBOL        j
+  -------         ENDDO         
+  C:0C1FH         LINE#         1
+  C:0C1FH         LINE#         3
+  C:0C3EH         LINE#         4
+  -------         ENDPROC       _DELAY
+  -------         ENDMOD        INCLUDE
+
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_DELAY?INCLUDE
+
+*** WARNING L1: UNRESOLVED EXTERNAL SYMBOL
+    SYMBOL:  _UART_TXHEX
+    MODULE:  .\Objects\test_uart.obj (TEST_UART)
+
+*** WARNING L1: UNRESOLVED EXTERNAL SYMBOL
+    SYMBOL:  _FIFO_GET
+    MODULE:  .\Objects\test_uart.obj (TEST_UART)
+
+*** WARNING L1: UNRESOLVED EXTERNAL SYMBOL
+    SYMBOL:  _UART_INIT
+    MODULE:  .\Objects\test_uart.obj (TEST_UART)
+
+*** WARNING L1: UNRESOLVED EXTERNAL SYMBOL
+    SYMBOL:  ?_UART_INIT?BYTE
+    MODULE:  .\Objects\test_uart.obj (TEST_UART)
+
+*** WARNING L1: UNRESOLVED EXTERNAL SYMBOL
+BL51 BANKED LINKER/LOCATER V6.22.4.0                                                  09/16/2026  22:04:29  PAGE 5
+
+
+    SYMBOL:  _UART_TXNUMBER
+    MODULE:  .\Objects\test_uart.obj (TEST_UART)
+
+*** WARNING L1: UNRESOLVED EXTERNAL SYMBOL
+    SYMBOL:  _UART_TXSTRING
+    MODULE:  .\Objects\test_uart.obj (TEST_UART)
+
+*** WARNING L1: UNRESOLVED EXTERNAL SYMBOL
+    SYMBOL:  _UART_TXCHAR
+    MODULE:  .\Objects\test_uart.obj (TEST_UART)
+
+*** WARNING L2: REFERENCE MADE TO UNRESOLVED EXTERNAL
+    SYMBOL:  _UART_TXSTRING
+    MODULE:  .\Objects\test_uart.obj (TEST_UART)
+    ADDRESS: 0B0DH
+
+*** WARNING L2: REFERENCE MADE TO UNRESOLVED EXTERNAL
+    SYMBOL:  _FIFO_GET
+    MODULE:  .\Objects\test_uart.obj (TEST_UART)
+    ADDRESS: 0B20H
+
+*** WARNING L2: REFERENCE MADE TO UNRESOLVED EXTERNAL
+    SYMBOL:  _UART_TXSTRING
+    MODULE:  .\Objects\test_uart.obj (TEST_UART)
+    ADDRESS: 0B31H
+
+*** WARNING L2: REFERENCE MADE TO UNRESOLVED EXTERNAL
+    SYMBOL:  _UART_TXHEX
+    MODULE:  .\Objects\test_uart.obj (TEST_UART)
+    ADDRESS: 0B36H
+
+*** WARNING L2: REFERENCE MADE TO UNRESOLVED EXTERNAL
+    SYMBOL:  _UART_TXSTRING
+    MODULE:  .\Objects\test_uart.obj (TEST_UART)
+    ADDRESS: 0B3FH
+
+*** WARNING L2: REFERENCE MADE TO UNRESOLVED EXTERNAL
+    SYMBOL:  _UART_TXCHAR
+    MODULE:  .\Objects\test_uart.obj (TEST_UART)
+    ADDRESS: 0B44H
+
+*** WARNING L2: REFERENCE MADE TO UNRESOLVED EXTERNAL
+    SYMBOL:  _UART_TXSTRING
+    MODULE:  .\Objects\test_uart.obj (TEST_UART)
+    ADDRESS: 0B4DH
+
+*** WARNING L2: REFERENCE MADE TO UNRESOLVED EXTERNAL
+    SYMBOL:  _UART_TXSTRING
+    MODULE:  .\Objects\test_uart.obj (TEST_UART)
+    ADDRESS: 0BA9H
+
+*** WARNING L2: REFERENCE MADE TO UNRESOLVED EXTERNAL
+    SYMBOL:  ?_UART_INIT?BYTE
+    MODULE:  .\Objects\test_uart.obj (TEST_UART)
+    ADDRESS: 0BADH
+
+*** WARNING L2: REFERENCE MADE TO UNRESOLVED EXTERNAL
+BL51 BANKED LINKER/LOCATER V6.22.4.0                                                  09/16/2026  22:04:29  PAGE 6
+
+
+    SYMBOL:  _UART_INIT
+    MODULE:  .\Objects\test_uart.obj (TEST_UART)
+    ADDRESS: 0BB5H
+
+*** WARNING L2: REFERENCE MADE TO UNRESOLVED EXTERNAL
+    SYMBOL:  _UART_TXSTRING
+    MODULE:  .\Objects\test_uart.obj (TEST_UART)
+    ADDRESS: 0BBEH
+
+*** WARNING L2: REFERENCE MADE TO UNRESOLVED EXTERNAL
+    SYMBOL:  _UART_TXSTRING
+    MODULE:  .\Objects\test_uart.obj (TEST_UART)
+    ADDRESS: 0BC7H
+
+*** WARNING L2: REFERENCE MADE TO UNRESOLVED EXTERNAL
+    SYMBOL:  ?_UART_INIT?BYTE
+    MODULE:  .\Objects\test_uart.obj (TEST_UART)
+    ADDRESS: 0BCAH
+
+*** WARNING L2: REFERENCE MADE TO UNRESOLVED EXTERNAL
+    SYMBOL:  _UART_INIT
+    MODULE:  .\Objects\test_uart.obj (TEST_UART)
+    ADDRESS: 0BD5H
+
+*** WARNING L2: REFERENCE MADE TO UNRESOLVED EXTERNAL
+    SYMBOL:  _UART_TXSTRING
+    MODULE:  .\Objects\test_uart.obj (TEST_UART)
+    ADDRESS: 0BDEH
+
+*** WARNING L2: REFERENCE MADE TO UNRESOLVED EXTERNAL
+    SYMBOL:  ?_UART_INIT?BYTE
+    MODULE:  .\Objects\test_uart.obj (TEST_UART)
+    ADDRESS: 0BE2H
+
+*** WARNING L2: REFERENCE MADE TO UNRESOLVED EXTERNAL
+    SYMBOL:  _UART_INIT
+    MODULE:  .\Objects\test_uart.obj (TEST_UART)
+    ADDRESS: 0BEAH
+
+*** WARNING L2: REFERENCE MADE TO UNRESOLVED EXTERNAL
+    SYMBOL:  _UART_TXSTRING
+    MODULE:  .\Objects\test_uart.obj (TEST_UART)
+    ADDRESS: 0B5BH
+
+*** WARNING L2: REFERENCE MADE TO UNRESOLVED EXTERNAL
+    SYMBOL:  _UART_TXSTRING
+    MODULE:  .\Objects\test_uart.obj (TEST_UART)
+    ADDRESS: 0B64H
+
+*** WARNING L2: REFERENCE MADE TO UNRESOLVED EXTERNAL
+    SYMBOL:  _UART_TXNUMBER
+    MODULE:  .\Objects\test_uart.obj (TEST_UART)
+    ADDRESS: 0B6BH
+
+*** WARNING L2: REFERENCE MADE TO UNRESOLVED EXTERNAL
+    SYMBOL:  _UART_TXSTRING
+    MODULE:  .\Objects\test_uart.obj (TEST_UART)
+BL51 BANKED LINKER/LOCATER V6.22.4.0                                                  09/16/2026  22:04:29  PAGE 7
+
+
+    ADDRESS: 0B74H
+
+*** WARNING L2: REFERENCE MADE TO UNRESOLVED EXTERNAL
+    SYMBOL:  _UART_TXNUMBER
+    MODULE:  .\Objects\test_uart.obj (TEST_UART)
+    ADDRESS: 0B7BH
+
+*** WARNING L2: REFERENCE MADE TO UNRESOLVED EXTERNAL
+    SYMBOL:  _UART_TXSTRING
+    MODULE:  .\Objects\test_uart.obj (TEST_UART)
+    ADDRESS: 0B84H
+
+*** WARNING L2: REFERENCE MADE TO UNRESOLVED EXTERNAL
+    SYMBOL:  _UART_TXSTRING
+    MODULE:  .\Objects\test_uart.obj (TEST_UART)
+    ADDRESS: 0B97H
+
+*** WARNING L2: REFERENCE MADE TO UNRESOLVED EXTERNAL
+    SYMBOL:  _UART_TXSTRING
+    MODULE:  .\Objects\test_uart.obj (TEST_UART)
+    ADDRESS: 0BA0H
+
+*** WARNING L2: REFERENCE MADE TO UNRESOLVED EXTERNAL
+    SYMBOL:  ?_UART_INIT?BYTE
+    MODULE:  .\Objects\test_uart.obj (TEST_UART)
+    ADDRESS: 0AB9H
+
+*** WARNING L2: REFERENCE MADE TO UNRESOLVED EXTERNAL
+    SYMBOL:  _UART_INIT
+    MODULE:  .\Objects\test_uart.obj (TEST_UART)
+    ADDRESS: 0AC1H
+
+*** WARNING L2: REFERENCE MADE TO UNRESOLVED EXTERNAL
+    SYMBOL:  _UART_TXSTRING
+    MODULE:  .\Objects\test_uart.obj (TEST_UART)
+    ADDRESS: 0ACAH
+
+*** WARNING L2: REFERENCE MADE TO UNRESOLVED EXTERNAL
+    SYMBOL:  _UART_TXSTRING
+    MODULE:  .\Objects\test_uart.obj (TEST_UART)
+    ADDRESS: 0AD3H
+
+*** WARNING L2: REFERENCE MADE TO UNRESOLVED EXTERNAL
+    SYMBOL:  _UART_TXSTRING
+    MODULE:  .\Objects\test_uart.obj (TEST_UART)
+    ADDRESS: 0ADCH
+
+*** WARNING L2: REFERENCE MADE TO UNRESOLVED EXTERNAL
+    SYMBOL:  _UART_TXSTRING
+    MODULE:  .\Objects\test_uart.obj (TEST_UART)
+    ADDRESS: 0AEEH
+
+*** WARNING L2: REFERENCE MADE TO UNRESOLVED EXTERNAL
+    SYMBOL:  _FIFO_GET
+    MODULE:  .\Objects\test_uart.obj (TEST_UART)
+    ADDRESS: 0AF7H
+
+BL51 BANKED LINKER/LOCATER V6.22.4.0                                                  09/16/2026  22:04:29  PAGE 8
+
+
+*** WARNING L2: REFERENCE MADE TO UNRESOLVED EXTERNAL
+    SYMBOL:  _UART_TXCHAR
+    MODULE:  .\Objects\test_uart.obj (TEST_UART)
+    ADDRESS: 0B02H
+
+******************************************************************************
+* RESTRICTED VERSION WITH 0800H BYTE CODE SIZE LIMIT; USED: 03C1H BYTE (46%) *
+******************************************************************************
+
+Program Size: data=60.0 xdata=0 code=1090
+LINK/LOCATE RUN COMPLETE.  41 WARNING(S),  0 ERROR(S)
